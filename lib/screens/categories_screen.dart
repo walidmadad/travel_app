@@ -9,7 +9,7 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Travel App"),
+        title: Text("Travel App", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue[700],
       ),
       body: GridView(
@@ -17,7 +17,7 @@ class CategoriesScreen extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 200,
           childAspectRatio: 7 / 8,
-          mainAxisExtent: 200,
+          mainAxisSpacing: 10,
           crossAxisSpacing: 10,
         ),
         children:
