@@ -12,7 +12,7 @@ class CategoryItem extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(15),
-          child: Image.network(imageUrl, height: 200, fit: BoxFit.cover),
+          child: Image.network(imageUrl, height: 250, fit: BoxFit.cover),
         ),
         Container(
           padding: EdgeInsets.all(10),
