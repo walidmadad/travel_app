@@ -14,26 +14,23 @@ class MyApp extends StatelessWidget {
       title: "Travel App",
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        hintColor : Colors.amber,
+        hintColor: Colors.amber,
         textTheme: ThemeData.light().textTheme.copyWith(
           headlineMedium: TextStyle(
             color: Colors.blue,
             fontSize: 24,
             fontFamily: "Arial",
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
           ),
           headlineSmall: TextStyle(
             color: Colors.white,
             fontSize: 20,
             fontFamily: "Arial",
-            fontWeight: FontWeight.normal
-          )
-        )
-
+            fontWeight: FontWeight.normal,
+          ),  
+        ),
       ),
-      supportedLocales: [
-        const Locale('en', 'eng')
-      ],
+      supportedLocales: [const Locale('en', 'eng')],
       home: CategoriesScreen(),
     );
   }
