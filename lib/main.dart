@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/screens/categories_screen.dart';
+import './screens/categories_screen.dart';
+import './screens/categories_trips_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,11 +28,15 @@ class MyApp extends StatelessWidget {
             fontSize: 20,
             fontFamily: "Arial",
             fontWeight: FontWeight.normal,
-          ),  
+          ),
         ),
       ),
       supportedLocales: [const Locale('en', 'eng')],
-      home: CategoriesScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (ctx) => CategoriesScreen(),
+        CategoriesTripsScreen.screenRoute: (ctx) => CategoriesTripsScreen(),
+      },
     );
   }
 }
