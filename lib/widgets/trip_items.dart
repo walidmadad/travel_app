@@ -5,7 +5,9 @@ class TripItems extends StatelessWidget {
   final Trip trip;
   const TripItems({super.key, required this.trip});
 
-  void selectTrip() {}
+  void selectTrip() {
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,60 @@ class TripItems extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
+                Container(
+                  height: 250,
+                  alignment: Alignment.bottomRight,
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black.withOpacity(0),
+                        Colors.black.withOpacity(0.8),
+                      ],
+                      stops: [0.6, 1],
+                    ),
+                  ),
+                  child: Text(
+                    trip.title,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    overflow: TextOverflow.fade,
+                  ),
+                ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.today, color: Theme.of(context).hintColor),
+                      SizedBox(width: 6),
+                      Text('${trip.duration} days'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.sunny, color: Theme.of(context).hintColor),
+                      SizedBox(width: 6),
+                      Text(trip.season.name),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.family_restroom,
+                        color: Theme.of(context).hintColor,
+                      ),
+                      SizedBox(width: 6),
+                      Text(trip.tripType.name),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
