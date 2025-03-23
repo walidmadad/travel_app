@@ -4,17 +4,12 @@ import '../screens/trip_deatils_screen.dart';
 
 class TripItems extends StatelessWidget {
   final Trip trip;
-  final Function removeItem;
-  const TripItems({super.key, required this.trip, required this.removeItem});
+  const TripItems({super.key, required this.trip});
 
   void selectTrip(BuildContext context) {
     Navigator.of(
       context,
-    ).pushNamed(TripDeatilsScreen.routeName, arguments: trip).then((result) {
-      if (result != null) {
-        removeItem(result);
-      }
-    });
+    ).pushNamed(TripDeatilsScreen.routeName, arguments: trip);
   }
 
   @override
