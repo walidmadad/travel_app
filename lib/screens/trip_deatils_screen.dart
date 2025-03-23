@@ -15,6 +15,12 @@ class TripDeatilsScreen extends StatelessWidget {
         backgroundColor: Colors.blue[700],
       ),
       body: TripDetails(trip: trip),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pop(trip.id);
+        },
+        child: Icon(Icons.delete),
+      ),
     );
   }
 }
