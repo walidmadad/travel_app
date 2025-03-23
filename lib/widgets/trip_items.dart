@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import '../models/trip.dart';
+import '../screens/trip_deatils_screen.dart';
 
 class TripItems extends StatelessWidget {
   final Trip trip;
   const TripItems({super.key, required this.trip});
 
-  void selectTrip() {
-    
+  void selectTrip(BuildContext context) {
+    Navigator.of(
+      context,
+    ).pushNamed(TripDeatilsScreen.routeName, arguments: trip);
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectTrip,
+      onTap: () => selectTrip(context),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 7,
