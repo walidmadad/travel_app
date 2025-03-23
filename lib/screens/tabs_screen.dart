@@ -1,35 +1,52 @@
 import 'package:flutter/material.dart';
-import '../screens/categories_screen.dart';
-import '../screens/favourites_screen.dart';
+import './categories_screen.dart';
+import './favourites_screen.dart';
 
-class TabsScreen extends StatelessWidget {
+class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
 
   @override
+  State<TabsScreen> createState() => _TabsScreenState();
+}
+
+class _TabsScreenState extends State<TabsScreen> {
+  void _selectScreen(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  int _selectedIndex = 0;
+
+  final List<Map<String, Object>> _screens = [
+    {'screen': CategoriesScreen(), 'title': "Categories"},
+    {'screen': FavouritesScreen(), 'title': "Favourites"},
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue[700],
-          title: Text("Travel App", style: TextStyle(color: Colors.white)),
-          bottom: TabBar(
-            tabs: [
-              Tab(
-                icon: Icon(Icons.dashboard, color: Colors.white),
-                child: Text(
-                  "Categories",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              Tab(
-                icon: Icon(Icons.star, color: Colors.white),
-                child: Text("Favourite", style: TextStyle(color: Colors.white)),
-              ),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          _screens[_selectedIndex]['title'] as String,
+          style: TextStyle(color: Colors.white),
         ),
-        body: TabBarView(children: [CategoriesScreen(), FavouritesScreen()]),
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
+      body: _screens[_selectedIndex]['screen'] as Widget,
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectScreen,
+        backgroundColor: Theme.of(context).primaryColor,
+        selectedItemColor: Theme.of(context).hintColor,
+        unselectedItemColor: Colors.white,
+        currentIndex: _selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: "Categories",
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favourites"),
+        ],
       ),
     );
   }
