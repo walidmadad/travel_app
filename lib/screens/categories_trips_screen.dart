@@ -3,26 +3,54 @@ import 'package:travel_app/models/trip.dart';
 import '../data.dart';
 import '../widgets/trip_items.dart';
 
-class CategoriesTripsScreen extends StatelessWidget {
+class CategoriesTripsScreen extends StatefulWidget {
   static const screenRoute = "category-trips";
+
+  @override
+  State<CategoriesTripsScreen> createState() => _CategoriesTripsScreenState();
+}
+
+class _CategoriesTripsScreenState extends State<CategoriesTripsScreen> {
+  late String categoryTitle = "";
+  late List<Trip> displayTrips = [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final routeArguments = ModalRoute.of(context)?.settings.arguments;
+    if (routeArguments == null || routeArguments is! Map<String, String>) {
+      return;
+    }
+
+    final categoryId = routeArguments['id'];
+    categoryTitle = routeArguments['title'] ?? "N/A";
+
+    if (categoryId != null) {
+      displayTrips = List.from(
+        tripsData.where((trip) => trip.categories.contains(categoryId)),
+      );
+    }
+  }
+
+  void _removeTrip(String tripId) {
+    setState(() {
+      displayTrips.removeWhere((trip) => trip.id == tripId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final routeAgrument =
-        ModalRoute.of(context)?.settings.arguments as Map<String, String>;
-    final String? categoryId = routeAgrument['id'];
-    final String? categoryTitle = routeAgrument['title'];
-    final List<Trip> filteredTrips =
-        tripsData.where((trip) {
-          return trip.categories.contains(categoryId) ? true : false;
-        }).toList();
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoryTitle!, style: TextStyle(color: Colors.white)),
+        title: Text(categoryTitle, style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue[700],
       ),
       body: ListView.builder(
-        itemBuilder: (ctx, index) => TripItems(trip: filteredTrips[index]),
-        itemCount: filteredTrips.length,
+        itemBuilder:
+            (ctx, index) =>
+                TripItems(trip: displayTrips[index], removeItem: _removeTrip),
+        itemCount: displayTrips.length,
       ),
     );
   }
