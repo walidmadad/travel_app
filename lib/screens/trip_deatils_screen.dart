@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/trip_details.dart';
 import '../models/trip.dart';
 
 class TripDeatilsScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class TripDeatilsScreen extends StatelessWidget {
         title: Text(trip.title, style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue[700],
       ),
-      body: Center(),
+      body: TripDetails(trip: trip),
     );
   }
 }
