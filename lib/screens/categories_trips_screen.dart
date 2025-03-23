@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/models/trip.dart';
-import '../data.dart';
 import '../widgets/trip_items.dart';
 
 class CategoriesTripsScreen extends StatefulWidget {
   static const screenRoute = "category-trips";
+
+  final List<Trip> availableTrips;
+
+  const CategoriesTripsScreen({super.key, required this.availableTrips});
 
   @override
   State<CategoriesTripsScreen> createState() => _CategoriesTripsScreenState();
@@ -16,8 +19,6 @@ class _CategoriesTripsScreenState extends State<CategoriesTripsScreen> {
 
   @override
   void didChangeDependencies() {
-    super.didChangeDependencies();
-
     final routeArguments = ModalRoute.of(context)?.settings.arguments;
     if (routeArguments == null || routeArguments is! Map<String, String>) {
       return;
@@ -27,10 +28,9 @@ class _CategoriesTripsScreenState extends State<CategoriesTripsScreen> {
     categoryTitle = routeArguments['title'] ?? "N/A";
 
     if (categoryId != null) {
-      displayTrips = List.from(
-        tripsData.where((trip) => trip.categories.contains(categoryId)),
-      );
+      displayTrips = widget.availableTrips.where((trip) => trip.categories.contains(categoryId)).toList();
     }
+       super.didChangeDependencies();
   }
 
   void _removeTrip(String tripId) {
