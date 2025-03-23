@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Travel App",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.blue[700],
         hintColor: Colors.amber,
         textTheme: ThemeData.light().textTheme.copyWith(
           headlineMedium: TextStyle(
