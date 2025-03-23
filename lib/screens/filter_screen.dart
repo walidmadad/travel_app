@@ -2,18 +2,29 @@ import 'package:flutter/material.dart';
 import '../widgets/app_drawer.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key});
-
   static const screenRoute = '/fliters';
+  final Function saveFilter;
+  final Map<String, bool> currentFilters;
+
+  const FilterScreen(this.currentFilters, this.saveFilter);
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  var _isInSommer = false;
-  var _isInWInter = false;
-  var _isForFamilly = false;
+  var _summer = false;
+  var _winter = false;
+  var _family = false;
+
+  @override
+  @override
+  void initState() {
+    _summer = widget.currentFilters['summer']!;
+    _winter = widget.currentFilters['winter']!;
+    _family = widget.currentFilters['family']!;
+    super.initState();
+  }
 
   SwitchListTile buildSwitchListTile(
     String title,
@@ -32,7 +43,22 @@ class _FilterScreenState extends State<FilterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Filter')),
+      appBar: AppBar(
+        title: Text('Filter'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              final selectedFilters = {
+                "summer": _summer,
+                "winter": _winter,
+                "family": _family,
+              };
+              widget.saveFilter(selectedFilters);
+            },
+            icon: Icon(Icons.save),
+          ),
+        ],
+      ),
       drawer: AppDrawer(),
       body: Column(
         children: [
@@ -43,30 +69,30 @@ class _FilterScreenState extends State<FilterScreen> {
                 buildSwitchListTile(
                   'Summer Travels',
                   'Show only travels for the summer season',
-                  _isInSommer,
+                  _summer,
                   (newValue) {
                     setState(() {
-                      _isInSommer = newValue;
+                      _summer = newValue;
                     });
                   },
                 ),
                 buildSwitchListTile(
                   'Winter Travels',
                   'Show only travels for the winter season',
-                  _isInWInter,
+                  _winter,
                   (newValue) {
                     setState(() {
-                      _isInWInter = newValue;
+                      _winter = newValue;
                     });
                   },
                 ),
                 buildSwitchListTile(
                   'Familly Travels',
                   'Show only travels for families',
-                  _isForFamilly,
+                  _family,
                   (newValue) {
                     setState(() {
-                      _isForFamilly = newValue;
+                      _family = newValue;
                     });
                   },
                 ),
