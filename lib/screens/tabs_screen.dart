@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './categories_screen.dart';
 import './favourites_screen.dart';
+import '../widgets/app_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -33,6 +34,7 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
+      drawer: AppDrawer(),
       body: _screens[_selectedIndex]['screen'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectScreen,
