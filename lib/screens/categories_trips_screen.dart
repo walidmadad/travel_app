@@ -33,11 +33,6 @@ class _CategoriesTripsScreenState extends State<CategoriesTripsScreen> {
        super.didChangeDependencies();
   }
 
-  void _removeTrip(String tripId) {
-    setState(() {
-      displayTrips.removeWhere((trip) => trip.id == tripId);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +44,7 @@ class _CategoriesTripsScreenState extends State<CategoriesTripsScreen> {
       body: ListView.builder(
         itemBuilder:
             (ctx, index) =>
-                TripItems(trip: displayTrips[index], removeItem: _removeTrip),
+                TripItems(trip: displayTrips[index]),
         itemCount: displayTrips.length,
       ),
     );
